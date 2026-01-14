@@ -1,0 +1,30 @@
+# Amplify redirect rules for SPA
+# Static assets should pass through without redirect
+
+# CRITICAL: Model files - MUST be served directly without any redirects
+# These rules must come FIRST before any catch-all rules
+/models/tiny_face_detector_model-shard1 /models/tiny_face_detector_model-shard1 200
+/models/tiny_face_detector_model-weights_manifest.json /models/tiny_face_detector_model-weights_manifest.json 200
+/models/face_landmark_68_model-shard1 /models/face_landmark_68_model-shard1 200
+/models/face_landmark_68_model-weights_manifest.json /models/face_landmark_68_model-weights_manifest.json 200
+
+# CRITICAL: Redirect trailing slash versions to non-trailing slash versions
+# Amplify may add trailing slashes - redirect them back
+/models/tiny_face_detector_model-shard1/ /models/tiny_face_detector_model-shard1 301
+/models/face_landmark_68_model-shard1/ /models/face_landmark_68_model-shard1 301
+/models/tiny_face_detector_model-weights_manifest.json/ /models/tiny_face_detector_model-weights_manifest.json 301
+/models/face_landmark_68_model-weights_manifest.json/ /models/face_landmark_68_model-weights_manifest.json 301
+
+# Catch-all for any other model files (must come after specific rules)
+/models/* /models/:splat 200
+
+# Other static assets
+/assessment/* /assessment/:splat 200
+/common/*    /common/:splat    200
+/test/*      /test/:splat      200
+/assets/*    /assets/:splat    200
+/favicon.ico /favicon.ico      200
+
+# SPA fallback for HTML5 routing - must be last
+/*           /index.html        200
+

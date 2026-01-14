@@ -1,0 +1,25 @@
+# Headers for face detection model files
+# These headers ensure face-api.js can properly load the models
+
+# JSON manifest files - must be served as application/json
+/models/*.json
+  Content-Type: application/json
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+
+# Binary model shard files - must be served as application/octet-stream
+# This pattern matches files with -shard in the name
+/models/*-shard*
+  Content-Type: application/octet-stream
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+
+# All model files fallback (catches any other model files)
+/models/*
+  Content-Type: application/octet-stream
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+
